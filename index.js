@@ -28,14 +28,23 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+//save the list to databse
 $("#save").click(function() {
-  firebase
-    .firestore()
-    .collection("mylist")
-    .add({
-      item: "try it"
-    });
-  console.log("save it");
+  //document.querySelectorAll('li') ==> nodelist
+  //for the loop to go through each nodelist
+  // and then get the text content
+
+  $("li").each(function() {
+    var value = $(this).text();
+    console.log(value);
+
+    firebase
+      .firestore()
+      .collection("mylist")
+      .add({
+        item: value
+      });
+  });
 });
 
 // Save the list to database
